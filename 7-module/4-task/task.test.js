@@ -159,7 +159,7 @@ describe('7-module-4-task', () => {
       let sliderRectLeft = stepSlider.elem.getBoundingClientRect().left;
       pointerMoveClientX = sliderRectLeft + 99;
 
-      pointerDownEvent = new PointerEvent('pointerdown', { bubbles: true });
+      pointerDownEvent = new PointerEvent('pointerdown', { clientX: sliderRectLeft, bubbles: true });
       pointerMoveEvent = new PointerEvent('pointermove', { clientX: pointerMoveClientX, bubbles: true });
       pointerUpEvent = new PointerEvent('pointerup', { clientX: pointerMoveClientX, bubbles: true });
     })
