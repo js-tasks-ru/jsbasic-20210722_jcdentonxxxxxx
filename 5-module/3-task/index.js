@@ -8,8 +8,9 @@ function initCarousel() {
   let carouselSlides = carouselInner.querySelectorAll('.carousel__slide');
 
   checkCount(count, carouselArrowRight, carouselArrowLeft, carouselSlides);
+  let carouselElem = document.querySelector('.carousel');
 
-  document.addEventListener('click', function (e) {
+  carouselElem.addEventListener('click', function (e) {
     let arrow = e.target.closest('[class^=carousel__arrow]');
     if (!arrow) {
       return;

@@ -6,23 +6,70 @@ export default class Cart {
   }
 
   addProduct(product) {
-    // ваш код
+    if (!product) {
+      return;
+    }
+    let isProduct = this.cartItems.find((item) => {
+      return item.product.id === product.id;
+    });
+    if (!isProduct) {
+      let newProduct = {};
+      newProduct.product = product;
+      newProduct.count = 1;
+      this.cartItems.push(newProduct);
+      this.onProductUpdate(newProduct);
+
+    } else {
+      isProduct.count++;
+      this.onProductUpdate(isProduct);
+    }
+
+    console.log(this.cartItems);
   }
 
   updateProductCount(productId, amount) {
-    // ваш код
+    let targetUpdate = this.cartItems.find((item) => {
+      return item.product.id === productId;
+    });
+
+    if (!targetUpdate) {
+      return;
+    }
+
+    targetUpdate.count += amount;
+
+    this.onProductUpdate(targetUpdate);
+
+    if (targetUpdate.count <= 0) {
+      let number = this.cartItems.findIndex((item) => {
+        return item.product.id === productId;
+
+      });
+
+      this.cartItems.splice(number, 1);
+    }
+
   }
 
   isEmpty() {
-    // ваш код
+    return !this.cartItems.length;
   }
 
   getTotalCount() {
-    // ваш код
+    let totalCount = 0;
+    for (let i = 0; i < this.cartItems.length; i++) {
+      totalCount += this.cartItems[i].count;
+    }
+
+    return totalCount;
   }
 
   getTotalPrice() {
-    // ваш код
+    let totalPrice = 0;
+    for (let i = 0; i < this.cartItems.length; i++) {
+      totalPrice = totalPrice + this.cartItems[i].product.price * this.cartItems[i].count;
+    }
+    return totalPrice;
   }
 
   onProductUpdate(cartItem) {
@@ -31,4 +78,3 @@ export default class Cart {
     this.cartIcon.update(this);
   }
 }
-
