@@ -13,7 +13,6 @@ export default class Cart {
   }
 
   addProduct(product) {
-
     if (!product) {
       return;
     }
@@ -237,3 +236,4 @@ export default class Cart {
     this.updateProductCount(idProduct, amount);
   }
 }
+
